@@ -1,4 +1,0 @@
-/home/irap/git/QtCMake/build/CMakeFiles/MyProject.dir
-/home/irap/git/QtCMake/build/CMakeFiles/MyProjectLib.dir
-/home/irap/git/QtCMake/build/CMakeFiles/MyProjectLib_automoc.dir
-/home/irap/git/QtCMake/build/CMakeFiles/MyProject_automoc.dir

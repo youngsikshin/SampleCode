@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC    -shared -Wl,-soname,libMyProjectLib.so -o libMyProjectLib.so CMakeFiles/MyProjectLib.dir/main.cpp.o CMakeFiles/MyProjectLib.dir/moc_qtcmakesample.cpp.o CMakeFiles/MyProjectLib.dir/MyProjectLib_automoc.cpp.o /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.2.1 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.2.1 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.2.1 
