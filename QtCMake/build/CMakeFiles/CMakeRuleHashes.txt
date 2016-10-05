@@ -1,0 +1,5 @@
+# Hashes of file build rules.
+ac4c7b59499cf52b004ed7d2ddd1a2e9 CMakeFiles/MyProjectLib_automoc
+5272e93a357a1b7afa22a6294309f4bd CMakeFiles/MyProject_automoc
+338380a59fb7f0f9afe84dad66d80c79 moc_qtcmakesample.cpp
+ebf28cde0b4e0a019173e9626bd73a3c ui_qtcmakesample.h

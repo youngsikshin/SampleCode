@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/MyProject.dir/qtcmakesample.cpp.o CMakeFiles/MyProject.dir/MyProject_automoc.cpp.o  -o MyProject -rdynamic libMyProjectLib.so /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.2.1 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.2.1 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.2.1 -Wl,-rpath,/home/irap/git/QtCMake/build 

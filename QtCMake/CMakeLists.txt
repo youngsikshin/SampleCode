@@ -1,0 +1,29 @@
+cmake_minimum_required (VERSION 2.8.12)
+project (MyProject)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+
+find_package (Qt5Widgets)
+set (MyProjectLib_src main.cpp)
+set (MyProjectLib_hdr qtcmakesample.h)
+set (MyProjectLib_ui  qtcmakesample.ui)
+set (MyProjectBin_src qtcmakesample.cpp)
+
+QT5_WRAP_CPP(MyProjectLib_hdr_moc ${MyProjectLib_hdr})
+QT5_WRAP_UI (MyProjectLib_ui_moc  ${MyProjectLib_ui})
+
+include_directories (${PROJECT_SOURCE_DIR})
+include_directories (${PROJECT_BINARY_DIR})
+
+add_library (MyProjectLib SHARED 
+    ${MyProjectLib_src}
+    ${MyProjectLib_hdr_moc}
+    ${MyProjectLib_ui_moc}
+)
+target_link_libraries (MyProjectLib Qt5::Widgets)
+
+add_executable(MyProject ${MyProjectBin_src})
+target_link_libraries (MyProject MyProjectLib)
+
