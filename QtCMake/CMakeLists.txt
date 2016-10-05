@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 2.8)
 
-FILE(GLOB qt_path /opt/Qt5*)
+FILE(GLOB qt_path /opt/Qt5*/*/*/lib/cmake)
+message("### qt_path: " ${qt_path})
+find_path(qt_cmake_path NAMES Qt5 PATH ${qt_path} NO_CMAKE_PATH)
+message("### qt_cmake_path: " ${qt_cmake_path})
 
 if(EXISTS ${qt_path})
-  set(CMAKE_PREFIX_PATH /opt/Qt5.6.1/5.6/gcc_64/lib/cmake)
+  set(CMAKE_PREFIX_PATH ${qt_path})
 endif()
 
 project(QtCMake)
@@ -39,8 +42,10 @@ if(Qt5_FOUND)
   QT5_WRAP_UI(UI_HEADERS qtcmakesample.ui)
   QT5_WRAP_CPP(UI_SOURCES qtcmakesample.h)
 
-  include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5Xml_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5OpenGL_INCLUDE_DIRS})
-  set(MY_QT_LIBRARIES ${Qt5Widgets_LIBRARIES} ${Qt5Core_LIBRARIES} ${Qt5Gui_LIBRARIES} ${Qt5Xml_LIBRARIES} ${Qt5OpenGL_LIBRARIES})
+  include_directories(${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS}
+)
+  set(MY_QT_LIBRARIES ${Qt5Core_LIBRARIES} ${Qt5Widgets_LIBRARIES}
+)
 endif()
 
 
