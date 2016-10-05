@@ -1,12 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 
-FILE(GLOB qt_path /opt/Qt5*/*/*/lib/cmake)
-message("### qt_path: " ${qt_path})
-find_path(qt_cmake_path NAMES Qt5 PATH ${qt_path} NO_CMAKE_PATH)
-message("### qt_cmake_path: " ${qt_cmake_path})
+file(GLOB qt_path /opt/Qt5*)
 
 if(EXISTS ${qt_path})
-  set(CMAKE_PREFIX_PATH ${qt_path})
+  set(CMAKE_PREFIX_PATH ${qt_path}/5.6/gcc_64/lib/cmake)
+  message("-- CMAKE_PREFIX_PATH is " ${qt_path}/5.6/gcc_64/lib/cmake)
 endif()
 
 project(QtCMake)
