@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 
-file(GLOB qt_path /opt/Qt5*)
+file(GLOB qt_path /opt/Qt*)
 
 if(EXISTS ${qt_path})
-  set(CMAKE_PREFIX_PATH ${qt_path}/5.6/gcc_64/lib/cmake)
-  message("-- CMAKE_PREFIX_PATH is " ${qt_path}/5.6/gcc_64/lib/cmake)
+  set(CMAKE_PREFIX_PATH ${qt_path}/5.7/gcc_64/lib/cmake)
+  message("-- CMAKE_PREFIX_PATH is " ${qt_path}/5.7/gcc_64/lib/cmake)
 endif()
 
 project(QtCMake)
