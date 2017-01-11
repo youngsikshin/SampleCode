@@ -148,6 +148,8 @@ void MyGLWidget::initializeGL()
     QOpenGLFunctions_3_1 qgl31;
 
 //    square_buf.bind();
+
+    shaderProgram.setAttributeArray("position", square_vertices.constData());
 }
 
 void MyGLWidget::paintGL()
@@ -180,7 +182,6 @@ void MyGLWidget::paintGL()
 
         shaderProgram.setUniformValue("mvpMatrix", pMatrix*vMatrix*mMatrix);
 
-        shaderProgram.setAttributeArray("position", square_vertices.constData());
         shaderProgram.setAttributeValue("instance_color", instance_colors[i]);
         shaderProgram.setAttributeValue("instance_position", instance_positions[i]);
 

@@ -6,7 +6,6 @@
 #include <QGLShaderProgram>
 #include <QMouseEvent>
 #include <QPoint>
-#include <QOpenGLFunctions_3_3_Core>
 
 class MyGLWidget : public QGLWidget
 {
@@ -35,7 +34,6 @@ private:
     QMatrix4x4 pMatrix;
     QGLShaderProgram shaderProgram;
     QVector<QVector3D> vertices;
-
 
     double alpha;
     double beta;

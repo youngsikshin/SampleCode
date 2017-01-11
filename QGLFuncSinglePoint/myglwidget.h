@@ -1,14 +1,17 @@
 #ifndef MYGLWIDGET_H
 #define MYGLWIDGET_H
 
-#include <QGLWidget>
+//#include <QGLWidget>
+#include <QOpenGLWidget>
 #include <QVector>
 #include <QGLShaderProgram>
 #include <QMouseEvent>
 #include <QPoint>
 #include <QOpenGLFunctions_3_3_Core>
+#include <QOpenGLVertexArrayObject>
+#include <QOpenGLContext>
 
-class MyGLWidget : public QGLWidget
+class MyGLWidget : public QOpenGLWidget
 {
     Q_OBJECT
 public:
@@ -27,23 +30,10 @@ protected:
     QSize minimumSizeHint() const;
     QSize sizeHint() const;
 
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void wheelEvent(QWheelEvent *event);
 
 private:
-    QMatrix4x4 pMatrix;
     QGLShaderProgram shaderProgram;
-    QVector<QVector3D> vertices;
-
-
-    double alpha;
-    double beta;
-    double distance;
-    double cam_translationX;
-    double cam_translationY;
-    QPoint lastLeftMousePosition;
-    QPoint lastRightMousePosition;
+    void draw_lineramble();
 };
 
 #endif // MYGLWIDGET_H
