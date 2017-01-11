@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/fragmentShader.fsh</file>
+        <file>resources/vertexShader.vsh</file>
+        <file>resources/tesselationControlShader.tcsh</file>
+        <file>resources/tesselationEvalShader.tesh</file>
+    </qresource>
+</RCC>
