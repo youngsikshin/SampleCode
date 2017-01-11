@@ -6,6 +6,7 @@
 #include <QGLShaderProgram>
 #include <QMouseEvent>
 #include <QPoint>
+#include <QGLBuffer>
 
 class MyGLWidget : public QGLWidget
 {
@@ -38,6 +39,7 @@ private:
     QVector<QVector4D> instance_colors;
     QVector<QVector4D> instance_positions;
 
+    QGLBuffer square_buf;
 
     double alpha;
     double beta;

@@ -14,7 +14,7 @@ out Fragment
 
 void main(void)
 {
-    gl_Position = mvpMatrix * (position + instance_position * vec4(0.25, 0.25, 1.0, 1.0));
+    gl_Position = mvpMatrix * (position + instance_position);
     fragment.color = instance_color;
 }
 //! [0]

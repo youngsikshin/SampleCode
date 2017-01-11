@@ -1,6 +1,10 @@
 #include <QtWidgets>
 #include <QtOpenGL>
+#include <QOpenGLFunctions_3_1>
+#include <QOpenGLExtraFunctions>
 #include <QVector3D>
+
+#include <QDebug>
 
 #include "myglwidget.h"
 
@@ -10,6 +14,8 @@ MyGLWidget::MyGLWidget(QWidget *parent)
     alpha = 25;
     beta = -25;
     distance = 2.5;
+
+    square_buf.create();
 }
 
 MyGLWidget::~MyGLWidget()
@@ -94,10 +100,10 @@ void MyGLWidget::initializeGL()
 
     shaderProgram.link();
 
-    square_vertices << QVector4D(-1.0,-1.0, 0.0, 0.0)
-                    << QVector4D( 1.0,-1.0, 0.0, 0.0)
-                    << QVector4D( 1.0, 1.0, 0.0, 0.0)
-                    << QVector4D(-1.0, 1.0, 0.0, 0.0);
+    square_vertices << QVector4D(-1.0,-1.0, 0.0, 1.0)
+                    << QVector4D( 1.0,-1.0, 0.0, 1.0)
+                    << QVector4D( 1.0, 1.0, 0.0, 1.0)
+                    << QVector4D(-1.0, 1.0, 0.0, 1.0);
 
     instance_colors << QVector4D( 1.0, 0.0, 0.0, 1.0)
                     << QVector4D( 0.0, 1.0, 0.0, 1.0)
@@ -109,6 +115,39 @@ void MyGLWidget::initializeGL()
                        << QVector4D( 2.0, 2.0, 0.0, 0.0)
                        << QVector4D(-2.0, 2.0, 0.0, 0.0);
 
+
+    static const GLfloat square_vertices2[] =
+    {
+        -1.0f, -1.0f, 0.0f, 1.0f,
+         1.0f, -1.0f, 0.0f, 1.0f,
+         1.0f,  1.0f, 0.0f, 1.0f,
+        -1.0f,  1.0f, 0.0f, 1.0f
+    };
+
+    static const GLfloat instance_colors2[] =
+    {
+        1.0f, 0.0f, 0.0f, 1.0f,
+        0.0f, 1.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 0.0f, 1.0f
+    };
+
+    static const GLfloat instance_positions2[] =
+    {
+        -2.0f, -2.0f, 0.0f, 0.0f,
+         2.0f, -2.0f, 0.0f, 0.0f,
+         2.0f,  2.0f, 0.0f, 0.0f,
+        -2.0f,  2.0f, 0.0f, 0.0f
+    };
+
+    GLuint      square_buffer;
+    GLuint      square_vao;
+
+    GLuint offset = 0;
+
+    QOpenGLFunctions_3_1 qgl31;
+
+//    square_buf.bind();
 }
 
 void MyGLWidget::paintGL()
@@ -122,34 +161,45 @@ void MyGLWidget::paintGL()
     cameraTransformation.rotate(alpha, 0, 1, 0);
     cameraTransformation.rotate(beta, 1, 0, 0);
 
-    QVector3D cameraPosition = cameraTransformation * QVector3D(0, 0, distance);
-    QVector3D cameraUpDirection = cameraTransformation * QVector3D(0, 1, 0);
+    QVector3D cameraPosition = QVector3D(0, 0, 10);
+    QVector3D cameraUpDirection = QVector3D(0, 1, 0);
 
+
+    qDebug() << cameraPosition;
     vMatrix.lookAt(cameraPosition, QVector3D(0, 0, 0), cameraUpDirection);
 
-//    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
+
+        QVector<QVector4D> instance_position;
+        instance_position << instance_positions[i] << instance_positions[i] << instance_positions[i];
+
+        QVector<QVector4D> instance_color;
+        instance_color << instance_colors[i] << instance_colors[i] << instance_colors[i];
 
         shaderProgram.bind();
 
         shaderProgram.setUniformValue("mvpMatrix", pMatrix*vMatrix*mMatrix);
 
         shaderProgram.setAttributeArray("position", square_vertices.constData());
-        shaderProgram.setAttributeArray("instance_color", instance_colors.constData());
-        shaderProgram.setAttributeArray("instance_position", instance_positions.constData());
+        shaderProgram.setAttributeValue("instance_color", instance_colors[i]);
+        shaderProgram.setAttributeValue("instance_position", instance_positions[i]);
 
         shaderProgram.enableAttributeArray("position");
-        shaderProgram.enableAttributeArray("instance_color");
-        shaderProgram.enableAttributeArray("instance_position");
+//        shaderProgram.enableAttributeArray("instance_color");
+//        shaderProgram.enableAttributeArray("instance_position");
 
         glDrawArrays(GL_TRIANGLE_FAN, 0, square_vertices.size());
+//        glEnable(GL_PRIMITIVE_RESTART);
 
         shaderProgram.disableAttributeArray("position");
-        shaderProgram.disableAttributeArray("instance_color");
-        shaderProgram.disableAttributeArray("instance_position");
+//        shaderProgram.disableAttributeArray("instance_color");
+//        shaderProgram.disableAttributeArray("instance_position");
 
-        shaderProgram.release();
 
-//    }
+
+    }
+
+    shaderProgram.release();
 
 }
 
@@ -161,7 +211,7 @@ void MyGLWidget::resizeGL(int width, int height)
     }
 
     pMatrix.setToIdentity();
-    pMatrix.perspective(60.0, (float) width / (float) height, 0.001, 1000);
+    pMatrix.perspective(60.0, (float) width / (float) height, 0.1, 1000);
 
     glViewport(0, 0, width, height);
 }
