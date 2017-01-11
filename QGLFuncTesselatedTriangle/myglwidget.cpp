@@ -39,14 +39,18 @@ void MyGLWidget::initializeGL()
 
     f->glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/resources/vertexShader.vsh");
-    shaderProgram.addShaderFromSourceFile(QOpenGLShader::TessellationControl, ":/resources/tesselationControlShader.tcsh");
-    shaderProgram.addShaderFromSourceFile(QOpenGLShader::TessellationEvaluation, ":/resources/tesselationEvalShader.tesh");
-    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/resources/fragmentShader.fsh");
+//    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/resources/vertexShader.vsh");
+//    shaderProgram.addShaderFromSourceFile(QOpenGLShader::TessellationControl, ":/resources/tesselationControlShader.tcsh");
+//    shaderProgram.addShaderFromSourceFile(QOpenGLShader::TessellationEvaluation, ":/resources/tesselationEvalShader.tesh");
+//    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Geometry, ":/resources/geometryShader.gsh");
+//    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/resources/fragmentShader.fsh");
+//    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/resources/varyingFragmentShader.fsh");
 
+    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/resources/outputVertexShader.vsh");
+    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/resources/varyingColorFragmentShader.fsh");
     shaderProgram.link();
 
-    g->glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+//    g->glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 void MyGLWidget::paintGL()
@@ -55,7 +59,8 @@ void MyGLWidget::paintGL()
     f->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     shaderProgram.bind();
-    f->glDrawArrays(GL_PATCHES, 0, 3);
+//    f->glDrawArrays(GL_PATCHES, 0, 3);
+    f->glDrawArrays(GL_TRIANGLES, 0, 3);
     shaderProgram.release();
 
 //    draw_lineramble();

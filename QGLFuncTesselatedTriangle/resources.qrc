@@ -4,5 +4,9 @@
         <file>resources/vertexShader.vsh</file>
         <file>resources/tesselationControlShader.tcsh</file>
         <file>resources/tesselationEvalShader.tesh</file>
+        <file>resources/geometryShader.gsh</file>
+        <file>resources/varyingFragmentShader.fsh</file>
+        <file>resources/outputVertexShader.vsh</file>
+        <file>resources/varyingColorFragmentShader.fsh</file>
     </qresource>
 </RCC>
